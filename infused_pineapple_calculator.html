@@ -1,0 +1,191 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@300;400;500;600;700;800&display=swap');
+:root{
+  --vb:#0D0D0D;--vw:#F5F0E8;--vo:#FF5F1F;--vp:#C4935A;--vs:#8A8A8A;
+  --f-c:'Barlow Condensed',sans-serif;--f-b:'Barlow',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+.wrap{background:transparent;font-family:var(--f-b);padding:0 0 1.5rem;}
+.doc-header{
+  border-left:3px solid var(--vo);
+  padding:0 0 0 14px;
+  margin-bottom:28px;
+}
+.doc-eyebrow{
+  font-family:var(--f-c);font-size:10px;font-weight:600;
+  letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--vo);margin-bottom:4px;
+}
+.doc-title{
+  font-family:var(--f-c);font-size:28px;font-weight:800;
+  text-transform:uppercase;letter-spacing:-0.01em;line-height:1;
+  color:var(--color-text-primary);
+}
+.input-block{
+  background:var(--color-background-secondary);
+  border-left:3px solid var(--vp);
+  border-radius:0;
+  padding:16px 18px;
+  margin-bottom:24px;
+  display:flex;align-items:center;gap:16px;
+}
+.input-label{
+  font-family:var(--f-c);font-size:11px;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.12em;
+  color:var(--vs);white-space:nowrap;
+}
+.pineapple-input{
+  font-family:var(--f-c);font-size:22px;font-weight:700;
+  letter-spacing:0.02em;color:var(--color-text-primary);
+  background:transparent;border:none;border-bottom:1.5px solid var(--vp);
+  outline:none;width:100px;padding:2px 4px;
+  -moz-appearance:textfield;
+}
+.pineapple-input::-webkit-outer-spin-button,
+.pineapple-input::-webkit-inner-spin-button{-webkit-appearance:none;}
+.pineapple-input:focus{border-bottom-color:var(--vo);}
+.unit-tag{
+  font-family:var(--f-c);font-size:13px;font-weight:500;
+  letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--vs);
+}
+.table-wrap{
+  background:var(--color-background-secondary);
+  border-left:3px solid var(--vp);
+  padding:0;
+}
+table{width:100%;border-collapse:collapse;}
+thead tr{border-bottom:1px solid var(--color-text-primary);}
+th{
+  font-family:var(--f-c);font-size:10px;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.12em;
+  color:var(--vs);
+  padding:10px 16px;text-align:left;
+}
+th:last-child{text-align:right;}
+td{
+  padding:11px 16px;
+  border-bottom:0.5px solid var(--color-border-tertiary);
+  font-family:var(--f-b);font-size:13px;
+  color:var(--color-text-primary);
+  vertical-align:middle;
+}
+td:last-child{text-align:right;}
+tr:last-child td{border-bottom:none;}
+.td-ingredient{font-weight:500;}
+.td-pct{
+  font-family:var(--f-c);font-size:13px;font-weight:500;
+  color:var(--vs);letter-spacing:0.04em;
+}
+.td-grams{
+  font-family:var(--f-c);font-size:16px;font-weight:700;
+  letter-spacing:0.02em;color:var(--color-text-primary);
+}
+.td-grams.zero{color:var(--vs);font-weight:400;}
+.base-row td{background:rgba(196,147,90,0.1);}
+.base-row .td-ingredient{
+  font-family:var(--f-c);font-weight:800;font-size:14px;
+  text-transform:uppercase;letter-spacing:0.06em;
+}
+.base-row .td-pct{color:var(--vo);font-weight:700;}
+.base-row .td-grams{font-size:18px;}
+.lock-icon{
+  display:inline-flex;align-items:center;gap:4px;
+  font-family:var(--f-c);font-size:9px;font-weight:600;
+  text-transform:uppercase;letter-spacing:0.1em;
+  color:var(--vs);opacity:0.6;margin-left:4px;vertical-align:middle;
+}
+.footer-note{
+  margin-top:16px;padding:10px 14px;
+  border-left:2px solid var(--color-border-tertiary);
+  font-family:var(--f-c);font-size:10px;font-weight:500;
+  text-transform:uppercase;letter-spacing:0.08em;
+  color:var(--vs);line-height:1.6;
+}
+</style>
+
+<h2 class="sr-only">Vice Pizza — Infused Pineapple ingredient calculator. Enter pineapple weight to see all other ingredient amounts.</h2>
+
+<div class="wrap">
+
+  <div class="doc-header">
+    <div class="doc-eyebrow">Vice Pizza &amp; Wings — Recipe Calculator</div>
+    <div class="doc-title">Infused Pineapple</div>
+  </div>
+
+  <div class="input-block">
+    <div class="input-label">How much pineapple do you have?</div>
+    <input class="pineapple-input" type="number" id="pine" min="0" placeholder="0" value="" autocomplete="off">
+    <span class="unit-tag">g</span>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Ingredient</th>
+          <th>Ratio</th>
+          <th>Amount</th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <tr class="base-row">
+          <td class="td-ingredient">Pineapple</td>
+          <td class="td-pct">100%</td>
+          <td class="td-grams" id="r-pine">— g</td>
+        </tr>
+        <tr>
+          <td class="td-ingredient">Brown Sugar</td>
+          <td class="td-pct">12%</td>
+          <td class="td-grams zero" id="r-sugar">— g</td>
+        </tr>
+        <tr>
+          <td class="td-ingredient">Cider Vinegar</td>
+          <td class="td-pct">5%</td>
+          <td class="td-grams zero" id="r-vinegar">— g</td>
+        </tr>
+        <tr>
+          <td class="td-ingredient">Chilli Flakes</td>
+          <td class="td-pct">3%</td>
+          <td class="td-grams zero" id="r-chilli">— g</td>
+        </tr>
+        <tr>
+          <td class="td-ingredient">Salt</td>
+          <td class="td-pct">1%</td>
+          <td class="td-grams zero" id="r-salt">— g</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer-note">
+    All quantities scale proportionally from pineapple weight &mdash; baking percentage method.<br>
+    In Google Sheets: protect all rows except the pineapple input cell via Data &rarr; Protect sheets &amp; ranges.
+  </div>
+
+</div>
+
+<script>
+const ratios={sugar:0.12,vinegar:0.05,chilli:0.03,salt:0.01};
+const ids={sugar:'r-sugar',vinegar:'r-vinegar',chilli:'r-chilli',salt:'r-salt'};
+
+function calc(){
+  const raw=document.getElementById('pine').value;
+  const v=parseFloat(raw);
+  const valid=!isNaN(v)&&v>0;
+  document.getElementById('r-pine').textContent=valid?Math.round(v)+' g':'— g';
+  document.getElementById('r-pine').className='td-grams'+(valid?'':' zero');
+  for(const k in ratios){
+    const el=document.getElementById(ids[k]);
+    if(valid){
+      el.textContent=Math.round(v*ratios[k])+' g';
+      el.className='td-grams';
+    } else {
+      el.textContent='— g';
+      el.className='td-grams zero';
+    }
+  }
+}
+document.getElementById('pine').addEventListener('input',calc);
+</script>
